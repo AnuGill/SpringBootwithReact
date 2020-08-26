@@ -32,12 +32,23 @@ class CarRepositoryTest {
 		assertThat(car.getBrand()).isNotNull();
 	}
 	
+	
 	@Test
 	public void deleteCars() {
 		entityManager.persistAndFlush(new Car("Tesla", "Model X", "white", "ABC-1234", 2017, 86000, null));
 		entityManager.persistAndFlush(new Car("Mini", "Cooper", "red", "ABC-1234", 2017, 86000, null));
 		carRepo.deleteAll();
 		assertThat(carRepo.findAll()).isEmpty();
+	}
+	
+	@Test
+	public void saveCars() {
+		Car car = new Car("Tesla", "Model X", "white", "ABC-1234", 2017, 86000, null);
+		Car car2 = new Car("Toyota", "Model Y", "Red", "ABC-1234", 2020, 86000, null);
+		entityManager.persistAndFlush(car);
+		entityManager.persistAndFlush(car2);
+		assertThat(car.getBrand()).isNotNull();
+		assertThat(car2.getBrand()).isNotNull();
 	}
 	
 }
